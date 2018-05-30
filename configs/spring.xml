@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+   <!--配置数据源 -->
+     <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource"
+	  p:driverClass="com.mysql.jdbc.Driver"
+	  p:jdbcUrl="jdbc:mysql://localhost:3306/kevin"
+	  p:username="kevin" p:password="kevin"/>
+	
+  <!--配置事务 -->
+     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+  	p:dataSource-ref="dataSource" />
+  <!--支持注解 声明式事务处理 -->
+     <tx:annotation-driven transaction-manager="txManager"/>
+  <!--配置MyBatis-sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+   p:dataSource-ref="dataSource" p:mapperLocations="classpath:com/ssm/dao/*Mapper.xml"
+   p:configLocation="classpath:myBatis.xml"/>
+   <!--Mybatis接口注入映射器-->
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+   p:basePackage="com.ssm.dao"/>
+   
+   <!--把pojo实例化到spring容器中，相当于配置文件中的<bean id="" class=""/>-->
+   <context:component-scan base-package="com.ssm"/>
+</beans>

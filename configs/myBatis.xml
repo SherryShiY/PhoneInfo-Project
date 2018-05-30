@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!--配置MyBatis的log实现为log4j -->
+  <settings>
+  	<setting name="logImpl" value="LOG4J"/>
+  </settings>
+   <!--给实体类取别名-->
+   <!-- <typeAliases>
+        简化在mapper配置文件中使用
+   		<typeAlias type="com.ssm.entity.Info" alias="info"/>
+   		简化在mapper配置文件中使用
+   		<typeAlias type="com.ssm.entity.Reply" alias="reply"/>
+   </typeAliases> -->
+</configuration>
